@@ -1,6 +1,6 @@
 {
   "name": "discordsrv-kommando",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "a discord-kommando.js plugin for error logging & eval",
   "main": "Icetang0123/main.js",
   "scripts": {
