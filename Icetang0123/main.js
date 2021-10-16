@@ -10,16 +10,16 @@ const srvSend = function(channel, message) {
 
 plugin.on('messageCreate', (msg) => {
     if (!plugin.config.channelID) throw new TypeError("Cannot read property 'channelID' of null");
-    if (!msg.channel.id == (channelID + "")) return;
+    if (msg.channel.id != (plugin.config.channelID + "")) return;
     var output = "";
     try {
         output = eval(msg);
     } catch(err) {
-        return srvSend(msg.channel, err.toString());
+        return srvSend(msg.channel, err.stack);
     }
     srvSend(msg.channel, output);
 });
 
-plugin.on('error', (err, client) => srvSend(client.channels.cache.get(plugin.config.chanelID), err.stack));
+plugin.on('error', (err, client) => srvSend(client.channels.cache.get(plugin.config.channelID), err.stack));
 
 module.exports = plugin;
