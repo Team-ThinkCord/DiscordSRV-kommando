@@ -1,6 +1,6 @@
 const Plugins = require('discord-kommando.js-plugins');
 const Discord = require('discord.js');
-const plugin = new Plugin.plugin(Plugins.perms.ALL, {
+const plugin = new Plugins.plugin(Plugins.perms.ALL, {
     channelID: null
 });
 
