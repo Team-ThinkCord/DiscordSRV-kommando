@@ -1,0 +1,30 @@
+{
+  "name": "discordsrv-kommando",
+  "version": "0.0.1",
+  "description": "a discord-kommando.js plugin for error logging & eval",
+  "main": "Icetang0123/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord-kommando.js",
+    "plugin",
+    "discordsrv",
+    "error",
+    "eval"
+  ],
+  "author": "Icetang0123",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "discord-kommando.js-plugins": "^1.0.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-ThinkCord/DiscordSRV-kommando.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Team-ThinkCord/DiscordSRV-kommando/issues"
+  },
+  "homepage": "https://github.com/Team-ThinkCord/DiscordSRV-kommando#readme"
+}
