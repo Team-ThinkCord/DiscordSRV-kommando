@@ -13,7 +13,7 @@ plugin.on('messageCreate', (msg) => {
     if (msg.channel.id != (plugin.config.channelID + "")) return;
     var output = "";
     try {
-        output = eval(msg);
+        output = eval(msg.content);
     } catch(err) {
         return srvSend(msg.channel, err.stack);
     }
