@@ -1,5 +1,6 @@
 const Plugins = require('discord-kommando.js-plugins');
 const Discord = require('discord.js');
+
 const plugin = new Plugins.plugin(Plugins.perms.ALL, {
     channelID: null
 });
@@ -10,16 +11,35 @@ const srvSend = function(channel, message) {
 
 plugin.on('messageCreate', (msg) => {
     if (!plugin.config.channelID) throw new TypeError("Cannot read property 'channelID' of null");
-    if (msg.channel.id != (plugin.config.channelID + "")) return;
-    var output = "";
-    try {
-        output = eval(msg.content);
-    } catch(err) {
-        return srvSend(msg.channel, err.stack);
+    
+    if(Array.isArray(plugin.config.channelID)) {
+       for(let channelId of plugin.config.channelID) {
+            if (msg.channel.id != (channelId + "")) return;
+            var output = "";
+            try {
+                output = eval(msg.content);
+            } catch(err) {
+                return srvSend(msg.channel, err.stack);
+            }
+            srvSend(msg.channel, output);
+       }
+    } else {
+        if(msg.channel.id != (plugin.config.channelID + "")) return;
+        var output = "";
+            try {
+                output = eval(msg.content);
+            } catch(err) {
+                return srvSend(msg.channel, err.stack);
+            }
+           
+        srvSend(msg.channel, output);
     }
-    srvSend(msg.channel, output);
 });
 
-plugin.on('error', (err, client) => srvSend(client.channels.cache.get(plugin.config.channelID), err.stack));
+plugin.on('error', (err, client) => {
+    for(let channelId of plugin.config.channelID) {
+        srvSend(client.channels.cache.get(channelId), err.stack);
+    }
+});
 
 module.exports = plugin;
