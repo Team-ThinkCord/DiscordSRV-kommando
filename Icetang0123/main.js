@@ -12,32 +12,22 @@ const srvSend = function(channel, message) {
 plugin.on('messageCreate', (msg) => {
     if (!plugin.config.channelID) throw new TypeError("Cannot read property 'channelID' of null");
     
-    if(Array.isArray(plugin.config.channelID)) {
-       for(let channelId of plugin.config.channelID) {
-            if (msg.channel.id != (channelId + "")) return;
-            var output = "";
-            try {
-                output = eval(msg.content);
-            } catch(err) {
-                return srvSend(msg.channel, err.stack);
-            }
-            srvSend(msg.channel, output);
-       }
-    } else {
-        if(msg.channel.id != (plugin.config.channelID + "")) return;
+    for (channelId of plugin.config.channelID) {
+        if (msg.channel.id != (channelId + "")) return;
         var output = "";
-            try {
-                output = eval(msg.content);
-            } catch(err) {
-                return srvSend(msg.channel, err.stack);
-            }
-           
+        try {
+            output = eval(msg.content);
+        } catch(err) {
+            return srvSend(msg.channel, err.stack);
+        }
         srvSend(msg.channel, output);
     }
 });
 
 plugin.on('error', (err, client) => {
-    for(let channelId of plugin.config.channelID) {
+    if (!plugin.config.channelID) throw new TypeError("Cannot read property 'channelID' of null");
+    
+    for (channelId of plugin.config.channelID) {
         srvSend(client.channels.cache.get(channelId), err.stack);
     }
 });
