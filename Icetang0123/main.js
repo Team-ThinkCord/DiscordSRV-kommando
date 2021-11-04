@@ -17,7 +17,8 @@ plugin.on('messageCreate', (msg) => {
         
         if (msg.channel.id != (channelId + "")) erred = true;
         var output = "";
-        try {
+        
+        if (!erred) try {
             output = eval(msg.content);
         } catch(err) {
             erred = true;
