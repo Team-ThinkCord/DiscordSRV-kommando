@@ -10,10 +10,11 @@ const srvSend = function(channel, message) {
 }
 
 plugin.on('messageCreate', (msg) => {
-    var erred = false;
     if (!plugin.config.channelID) throw new TypeError("Cannot read property 'channelID' of null");
     
     for (channelId of plugin.config.channelID) {
+        var erred = false;
+        
         if (msg.channel.id != (channelId + "")) erred = true;
         var output = "";
         try {
