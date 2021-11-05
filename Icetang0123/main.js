@@ -24,7 +24,7 @@ plugin.on('messageCreate', (msg) => {
             erred = true;
             srvSend(msg.channel, err.stack);
         }
-        if (!erred) srvSend(msg.channel, output);
+        if (!erred) srvSend(msg.channel, output.replace(new RegExp(msg.client.token, "g"), "[TOKEN HIDED]"));
     }
 });
 
